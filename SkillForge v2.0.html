@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="ru" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SkillForge v2.0 — RPG Трекер Задач и Прокачки Жизни</title>
+  
+  <!-- Inline PWA Manifest & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='50%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='%230f172a'/%3E%3Cpolygon points='256,118 384,192 384,340 256,414 128,340 128,192' fill='url(%23g)'/%3E%3Cpolygon points='256,118 384,192 256,236 128,192' fill='%23ffffff' fill-opacity='0.18'/%3E%3Cpath d='M194,271 L256,221 L318,271' fill='none' stroke='%23ffffff' stroke-width='22' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M194,335 L256,285 L318,335' fill='none' stroke='%23ffffff' stroke-width='22' stroke-linecap='round' stroke-linejoin='round' stroke-opacity='0.8'/%3E%3Cpath d='M382,104C385,115 387,117 398,120C387,123 385,125 382,136C379,125 377,123 366,120C377,117 379,115 382,104Z' fill='%23fbbf24'/%3E%3Ccircle cx='412' cy='150' r='7' fill='%23fbbf24'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='50%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='%230f172a'/%3E%3Cpolygon points='256,118 384,192 384,340 256,414 128,340 128,192' fill='url(%23g)'/%3E%3Cpolygon points='256,118 384,192 256,236 128,192' fill='%23ffffff' fill-opacity='0.18'/%3E%3Cpath d='M194,271 L256,221 L318,271' fill='none' stroke='%23ffffff' stroke-width='22' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M194,335 L256,285 L318,335' fill='none' stroke='%23ffffff' stroke-width='22' stroke-linecap='round' stroke-linejoin='round' stroke-opacity='0.8'/%3E%3Cpath d='M382,104C385,115 387,117 398,120C387,123 385,125 382,136C379,125 377,123 366,120C377,117 379,115 382,104Z' fill='%23fbbf24'/%3E%3Ccircle cx='412' cy='150' r='7' fill='%23fbbf24'/%3E%3C/svg%3E">
+  
+  <link rel="manifest" href='data:application/json,{"name":"SkillForge — RPG Life Tracker","short_name":"SkillForge","description":"Твой RPG трекер задач и прокачки жизни","start_url":"./","display":"standalone","background_color":"#0f172a","theme_color":"#3b82f6","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%233b82f6%22/%3E%3Cstop offset=%2250%25%22 stop-color=%22%236366f1%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%23a855f7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22512%22 height=%22512%22 rx=%22120%22 fill=%22%230f172a%22/%3E%3Cpolygon points=%22256,118 384,192 384,340 256,414 128,340 128,192%22 fill=%22url(%23g)%22/%3E%3Cpolygon points=%22256,118 384,192 256,236 128,192%22 fill=%22%23ffffff%22 fill-opacity=%220.18%22/%3E%3Cpath d=%22M194,271 L256,221 L318,271%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%2222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M194,335 L256,285 L318,335%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%2222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-opacity=%220.8%22/%3E%3Cpath d=%22M382,104C385,115 387,117 398,120C387,123 385,125 382,136C379,125 377,123 366,120C377,117 379,115 382,104Z%22 fill=%22%23fbbf24%22/%3E%3Ccircle cx=%22412%22 cy=%22150%22 r=%227%22 fill=%22%23fbbf24%22/%3E%3C/svg%3E","sizes":"192x192 512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              accent: '#4f46e5',
+              bg: '#f3f5f9'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'card': '0 2px 10px rgba(0,0,0,0.03), 0 0 1px rgba(0,0,0,0.1)',
+            'glow': '0 0 25px rgba(59, 130, 246, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f3f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Clean Card Styling */
+    .app-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease-in-out;
+    }
+    .app-card:hover {
+      box-shadow: 0 8px 25px -4px rgba(59, 130, 246, 0.08);
+      transform: translateY(-1px);
+    }
+
+    /* Ambient background glow blobs */
+    .bg-orb {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* Preset selector card */
+    .preset-card {
+      border: 1.5px solid #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .preset-card.selected {
+      border-color: #3b82f6;
+      background-color: #eff6ff;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    #fx-canvas {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="bg-[#f3f5f9] text-slate-800 font-sans min-h-screen antialiased flex flex-col justify-between selection:bg-blue-500 selection:text-white pb-20 md:pb-6">
+
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Ambient background accents -->
+  <div class="bg-orb w-72 h-72 bg-blue-400 -top-10 -left-16"></div>
+  <div class="bg-orb w-72 h-72 bg-purple-400 top-40 -right-20"></div>
+
+  <div id="app" class="max-w-4xl mx-auto w-full min-h-screen flex flex-col relative z-10 px-3 sm:px-6 py-4">
+    
+    <!-- HEADER NAVBAR (Static Scroll) -->
+    <header class="bg-white/90 backdrop-blur-md rounded-2xl p-3.5 mb-5 flex items-center justify-between border border-slate-200 shadow-sm relative z-30">
+      <!-- Logo & Brand -->
+      <div class="flex items-center space-x-2.5 cursor-pointer group" onclick="switchTab('dashboard')">
+        <div class="relative w-9 h-9 shrink-0">
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 blur-md opacity-40 group-hover:opacity-70 transition-opacity"></div>
+          <div class="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 flex items-center justify-center shadow-md shadow-blue-500/25 ring-1 ring-white/20">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none">
+              <path d="M4 15L12 8L20 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 20L12 13L20 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.55"/>
+              <circle cx="12" cy="4.5" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-1.5">
+            SkillForge
+            <span class="text-[9px] font-bold text-indigo-600 bg-indigo-50 border border-indigo-200/80 px-1.5 py-[1px] rounded-md tracking-wide">v2.0</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Stats Quick Badges -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Streak -->
+        <div class="flex items-center space-x-1 bg-amber-50 border border-amber-200/80 px-2.5 py-1 rounded-xl text-xs font-bold text-amber-600">
+          <span>🔥</span>
+          <span id="header-streak">1</span>
+          <span class="text-[11px] font-medium text-amber-600/80">день</span>
+        </div>
+
+        <!-- Overall Level Badge -->
+        <div class="flex items-center space-x-1 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-xl text-xs font-bold text-blue-600">
+          <span class="text-[11px] font-normal text-blue-500">Ур.</span>
+          <span id="header-level">1</span>
+        </div>
+
+        <!-- PWA Install Button -->
+        <button id="pwa-install-btn" onclick="installPWA()" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl text-xs font-semibold items-center space-x-1 shadow-md shadow-emerald-500/20 transition-all active:scale-95">
+          <span>📲</span>
+          <span class="hidden sm:inline">Установить</span>
+        </button>
+
+        <!-- Add Task Quick Button -->
+        <button onclick="openModal('modal-task')" class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center space-x-1 shadow-md shadow-blue-600/20 transition-all active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          <span class="hidden sm:inline">Новая задача</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Desktop Nav Tabs -->
+    <nav class="hidden md:flex items-center justify-center space-x-2 mb-6 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
+      <button id="tab-btn-dashboard" onclick="switchTab('dashboard')" class="tab-btn px-5 py-2 rounded-xl text-xs font-semibold transition-all text-blue-600 bg-blue-50">
+        📊 Главная
+      </button>
+      <button id="tab-btn-tasks" onclick="switchTab('tasks')" class="tab-btn px-5 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-800">
+        ⚔️ Задачи
+      </button>
+      <button id="tab-btn-canvas" onclick="switchTab('canvas')" class="tab-btn px-5 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-800">
+        🌌 Древо навыков
+      </button>
+      <button id="tab-btn-analytics" onclick="switchTab('analytics')" class="tab-btn px-5 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-800">
+        📈 Аналитика
+      </button>
+    </nav>
+
+    <!-- MAIN CONTENT VIEW PANELS -->
+    <main class="flex-1 pb-10">
+      
+      <!-- DASHBOARD VIEW -->
+      <section id="view-dashboard" class="tab-view space-y-5">
+        
+        <!-- Hero Banner Card with Avatar & Gauge -->
+        <div class="app-card p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden">
+          <div class="flex items-center space-x-4">
+            <!-- Hero Avatar Icon -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center text-3xl shadow-lg shadow-slate-900/20 shrink-0 border border-slate-700">
+              🧙‍♂️
+            </div>
+
+            <div class="space-y-1">
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                Привет, <span id="hero-username" class="text-blue-600">Новичок!</span>
+              </h2>
+              <p id="hero-subtitle" class="text-xs sm:text-sm text-slate-500 max-w-xs leading-relaxed">
+                Сегодня — отличный день, чтобы стать лучше.
+              </p>
+            </div>
+          </div>
+
+          <!-- Circular Percentage Gauge -->
+          <div class="relative w-28 h-28 flex items-center justify-center shrink-0">
+            <canvas id="gauge-canvas" width="120" height="120" class="w-full h-full"></canvas>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span id="gauge-percent-text" class="text-xl font-black text-slate-900">0%</span>
+              <span id="gauge-level-sub" class="text-[10px] text-blue-600 font-bold">Ур. 1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Stats Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="app-card p-3.5 text-left">
+            <p class="text-[11px] text-slate-400 font-medium">Активные цели</p>
+            <p id="stat-categories-count" class="text-xl font-black text-slate-800 mt-0.5">0</p>
+          </div>
+          <div class="app-card p-3.5 text-left">
+            <p class="text-[11px] text-slate-400 font-medium">Задачи на сегодня</p>
+            <p id="stat-today-tasks" class="text-xl font-black text-slate-800 mt-0.5">0</p>
+          </div>
+          <div class="app-card p-3.5 text-left">
+            <p class="text-[11px] text-slate-400 font-medium">Дней подряд</p>
+            <p id="stat-streak-count" class="text-xl font-black text-slate-800 mt-0.5">1</p>
+          </div>
+          <div class="app-card p-3.5 text-left">
+            <p class="text-[11px] text-slate-400 font-medium">% выполнения</p>
+            <p id="stat-completion-rate" class="text-xl font-black text-slate-800 mt-0.5">0%</p>
+          </div>
+        </div>
+
+        <!-- Categories Header -->
+        <div class="flex items-center justify-between pt-1">
+          <h3 class="text-base font-bold text-slate-900">Категории развития</h3>
+          <button onclick="openModal('modal-category')" class="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center space-x-1">
+            <span>+ Добавить сферу</span>
+          </button>
+        </div>
+
+        <!-- Categories Grid -->
+        <div id="categories-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Today Tasks Section -->
+        <div class="app-card p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-900">Задачи на сегодня</h3>
+            <button onclick="switchTab('tasks')" class="text-xs font-semibold text-blue-600 hover:underline flex items-center space-x-1">
+              <span>Все задачи →</span>
+            </button>
+          </div>
+
+          <!-- Highlight Progress Tag Banner -->
+          <div class="bg-blue-50 border border-blue-100 p-3 rounded-xl flex items-center justify-between text-xs font-semibold text-blue-700">
+            <div class="flex items-center space-x-2">
+              <span>🎯</span>
+              <span>Начни свой путь!</span>
+            </div>
+            <span id="today-task-summary-badge" class="bg-white px-2.5 py-0.5 rounded-lg text-blue-600 text-[11px] font-bold shadow-2xs">0 из 0 выполнено</span>
+          </div>
+
+          <!-- Task Items List -->
+          <div id="dashboard-tasks-list" class="space-y-2">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TASKS VIEW -->
+      <section id="view-tasks" class="tab-view space-y-4 hidden">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-black text-slate-900">Задачи</h2>
+          <button onclick="openModal('modal-task')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md shadow-blue-600/20 flex items-center space-x-1">
+            <span>+ Новая задача</span>
+          </button>
+        </div>
+
+        <!-- Filters Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-between items-center bg-white p-2.5 rounded-2xl border border-slate-200">
+          <div class="flex bg-slate-100 p-1 rounded-xl w-full sm:w-auto">
+            <button onclick="setTaskFilter('timeframe', 'today')" id="filter-tf-today" class="tf-btn flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-blue-600 shadow-sm transition-all">
+              Сегодня
+            </button>
+            <button onclick="setTaskFilter('timeframe', 'week')" id="filter-tf-week" class="tf-btn flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 transition-all">
+              Неделя
+            </button>
+            <button onclick="setTaskFilter('timeframe', 'month')" id="filter-tf-month" class="tf-btn flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 transition-all">
+              Месяц
+            </button>
+            <button onclick="setTaskFilter('timeframe', 'all')" id="filter-tf-all" class="tf-btn flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 transition-all">
+              Все
+            </button>
+          </div>
+
+          <div class="w-full sm:w-48">
+            <select id="filter-category-select" onchange="renderTasks()" class="w-full bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
+              <option value="all">Все категории ∨</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tasks Full List -->
+        <div id="full-tasks-list" class="space-y-2.5">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- SKILL TREE / CANVAS VIEW -->
+      <section id="view-canvas" class="tab-view space-y-4 hidden">
+        <div class="bg-[#0b0e17] rounded-3xl p-5 sm:p-6 text-white relative overflow-hidden shadow-2xl border border-slate-800 min-h-[560px] flex flex-col justify-between">
+          <div class="space-y-1 z-10">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xl font-bold text-white">Древо навыков</h2>
+              <button onclick="switchTab('dashboard')" class="text-slate-400 hover:text-white text-xs">✕</button>
+            </div>
+            <p class="text-xs text-slate-400">Исследуй свои сферы и открывай новые возможности.</p>
+          </div>
+
+          <!-- Interactive Canvas -->
+          <div class="relative w-full h-[320px] sm:h-[380px] my-auto">
+            <canvas id="skill-tree-canvas" class="w-full h-full cursor-pointer"></canvas>
+          </div>
+
+          <!-- Bottom Card Drawer overlay -->
+          <div id="canvas-node-info" class="bg-white text-slate-800 p-4 rounded-2xl border border-slate-200 shadow-2xl z-20 transition-all space-y-3">
+            <div class="flex justify-between items-start">
+              <div class="flex items-center space-x-3">
+                <div id="cnode-icon" class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
+                  🌟
+                </div>
+                <div>
+                  <h4 id="cnode-title" class="font-bold text-slate-900 text-sm">Выберите сферу</h4>
+                  <p id="cnode-level" class="text-xs text-slate-500 font-medium">Нажмите на узел в созвездии</p>
+                </div>
+              </div>
+            </div>
+
+            <p id="cnode-goal" class="text-xs text-slate-600">Нажми на одну из сфер выше, чтобы увидеть подробный прогресс.</p>
+
+            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div id="cnode-bar" class="bg-blue-600 h-full w-[0%] rounded-full transition-all"></div>
+            </div>
+
+            <button id="cnode-detail-btn" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/20 transition-all">
+              Открыть карточку категории
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS VIEW -->
+      <section id="view-analytics" class="tab-view space-y-5 hidden">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-black text-slate-900">Аналитика</h2>
+          <span class="text-xs font-bold text-amber-500 bg-amber-50 px-2.5 py-1 rounded-xl border border-amber-200">👑</span>
+        </div>
+
+        <!-- Weekly XP Bar Chart -->
+        <div class="app-card p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">XP за неделю</h3>
+            <span id="analytics-total-xp" class="text-xs font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-lg">+0 XP</span>
+          </div>
+          <div class="h-44 relative">
+            <canvas id="chart-xp-history" class="w-full h-full"></canvas>
+          </div>
+        </div>
+
+        <!-- Sphere Distribution Pie Chart -->
+        <div class="app-card p-5 space-y-3">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Распределение сфер</h3>
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="w-40 h-40 relative shrink-0">
+              <canvas id="chart-category-pie" class="w-full h-full"></canvas>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span class="text-[10px] text-slate-400">Всего</span>
+                <span id="pie-total-spheres" class="text-sm font-bold text-slate-800">0 сфер</span>
+              </div>
+            </div>
+
+            <!-- Legend List -->
+            <div id="pie-legend-list" class="flex-1 space-y-1.5 text-xs w-full">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievements & Badges -->
+        <div class="app-card p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Достижения и медали</h3>
+            <button class="text-xs text-blue-600 font-semibold hover:underline">Все →</button>
+          </div>
+          <div id="achievements-list" class="grid grid-cols-3 gap-2 sm:gap-3">
+            <!-- Dynamically rendered -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="md:hidden fixed bottom-2 left-3 right-3 bg-white/95 backdrop-blur-md rounded-2xl p-2 z-40 flex justify-around items-center border border-slate-200 shadow-xl">
+      <button onclick="switchTab('dashboard')" id="mtab-dashboard" class="flex flex-col items-center p-1.5 rounded-xl text-blue-600 transition-all">
+        <span class="text-base">📊</span>
+        <span class="text-[10px] font-bold mt-0.5">Главная</span>
+      </button>
+      <button onclick="switchTab('tasks')" id="mtab-tasks" class="flex flex-col items-center p-1.5 rounded-xl text-slate-400 transition-all">
+        <span class="text-base">⚔️</span>
+        <span class="text-[10px] font-medium mt-0.5">Задачи</span>
+      </button>
+      <button onclick="switchTab('canvas')" id="mtab-canvas" class="flex flex-col items-center p-1.5 rounded-xl text-slate-400 transition-all">
+        <span class="text-base">🌌</span>
+        <span class="text-[10px] font-medium mt-0.5">Древо</span>
+      </button>
+      <button onclick="switchTab('analytics')" id="mtab-analytics" class="flex flex-col items-center p-1.5 rounded-xl text-slate-400 transition-all">
+        <span class="text-base">📈</span>
+        <span class="text-[10px] font-medium mt-0.5">Аналитика</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ONBOARDING SCREENS -->
+  <div id="onboarding-screen" class="fixed inset-0 bg-[#f3f5f9] z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 sm:p-8 border border-slate-200 space-y-6 shadow-xl my-auto">
+      
+      <!-- STEP 1: SPLASH & NAME INPUT -->
+      <div id="ob-step-1" class="text-center space-y-6">
+        <!-- 3D Faceted Crystal Icon -->
+        <div class="w-28 h-28 mx-auto flex items-center justify-center">
+          <svg class="w-24 h-24 drop-shadow-xl" viewBox="0 0 100 100" fill="none">
+            <polygon points="50,10 85,35 50,90 15,35" fill="url(#crystalGradient)" />
+            <polygon points="50,10 85,35 50,45" fill="#a855f7" opacity="0.4" />
+            <polygon points="50,10 15,35 50,45" fill="#ffffff" opacity="0.5" />
+            <polygon points="15,35 50,45 50,90" fill="#3b82f6" opacity="0.6" />
+            <polygon points="85,35 50,45 50,90" fill="#6366f1" opacity="0.8" />
+            <defs>
+              <linearGradient id="crystalGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#c084fc"/>
+                <stop offset="50%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-2xl font-black text-slate-900 tracking-tight">SkillForge</h2>
+          <p class="text-xs font-bold text-blue-600 uppercase tracking-widest">Твоя жизнь — твоя прокачка</p>
+          <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed pt-1">
+            Ставь цели, выполняй задачи, развивайся и становись лучше каждый день.
+          </p>
+        </div>
+
+        <div class="text-left space-y-1.5">
+          <div class="relative">
+            <span class="absolute left-3.5 top-3 text-slate-400 text-sm">👤</span>
+            <input type="text" id="ob-nickname" placeholder="Как тебя зовут?" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
+
+        <button onclick="goToOnboardingStep2()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm shadow-md shadow-blue-600/30 transition-all">
+          Продолжить →
+        </button>
+
+        <div class="flex justify-center space-x-1 pt-2">
+          <span class="text-xs text-slate-400 font-medium">1 / 2</span>
+        </div>
+      </div>
+
+      <!-- STEP 2: SPHERES SELECTION -->
+      <div id="ob-step-2" class="space-y-5 hidden">
+        <div class="flex justify-between items-center">
+          <span onclick="goToOnboardingStep1()" class="text-xs font-bold text-slate-400 cursor-pointer">← Назад</span>
+          <span onclick="finishOnboarding()" class="text-xs font-semibold text-slate-400 hover:text-slate-600 cursor-pointer">Пропустить</span>
+        </div>
+
+        <div class="space-y-1">
+          <h3 class="text-lg font-black text-slate-900">Выбери свои стартовые сферы развития</h3>
+          <p class="text-xs text-slate-500">Ты можешь выбрать несколько или пропустить этот шаг.</p>
+        </div>
+
+        <!-- Preset Cards Grid -->
+        <div id="ob-preset-grid" class="grid grid-cols-2 gap-2.5 max-h-[300px] overflow-y-auto p-1">
+          <!-- Populated dynamically -->
+        </div>
+
+        <button onclick="finishOnboarding()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/30 transition-all">
+          Создать моего Героя 🚀
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: ADD TASK -->
+  <div id="modal-task" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 border border-slate-200 space-y-4 relative shadow-2xl">
+      <button onclick="closeModal('modal-task')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-sm">✕</button>
+      
+      <h3 class="text-base font-black text-slate-900">Новая задача</h3>
+
+      <form id="form-add-task" onsubmit="handleAddTask(event)" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Название задачи</label>
+          <input type="text" id="task-title" required placeholder="Например: Прочитать главу книги" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Категория</label>
+          <select id="task-category-select" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+            <!-- Populated -->
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Срок выполнения</label>
+          <div class="grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl text-[10px] font-bold text-center text-slate-600">
+            <button type="button" onclick="selectTimeframePill('today')" id="tf-pill-today" class="tf-pill-btn bg-blue-600 text-white py-1 rounded-lg">Сегодня</button>
+            <button type="button" onclick="selectTimeframePill('week')" id="tf-pill-week" class="tf-pill-btn py-1 rounded-lg">Неделя</button>
+            <button type="button" onclick="selectTimeframePill('month')" id="tf-pill-month" class="tf-pill-btn py-1 rounded-lg">Месяц</button>
+            <button type="button" onclick="selectTimeframePill('once')" id="tf-pill-once" class="tf-pill-btn py-1 rounded-lg">Без срока</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Приоритет</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" onclick="selectXpPill(15)" id="xp-pill-15" class="xp-pill-btn py-1.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-600">
+              +15 XP
+            </button>
+            <button type="button" onclick="selectXpPill(25)" id="xp-pill-25" class="xp-pill-btn py-1.5 border-2 border-blue-500 bg-blue-50 text-blue-600 rounded-xl text-xs font-bold">
+              +25 XP
+            </button>
+            <button type="button" onclick="selectXpPill(50)" id="xp-pill-50" class="xp-pill-btn py-1.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-600">
+              +50 XP
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/30 transition-all pt-2">
+          Создать
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD CATEGORY -->
+  <div id="modal-category" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 border border-slate-200 space-y-4 relative shadow-2xl">
+      <button onclick="closeModal('modal-category')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-sm">✕</button>
+      
+      <h3 class="text-base font-black text-slate-900">Новая категория</h3>
+
+      <form id="form-add-category" onsubmit="handleAddCategory(event)" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Название сферы</label>
+          <input type="text" id="cat-title" required placeholder="Например: Здоровье" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Emoji</label>
+          <select id="cat-icon" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+            <option value="❤️">❤️ Здоровье</option>
+            <option value="🎓">🎓 Учёба</option>
+            <option value="⚡">⚡ Продуктивность</option>
+            <option value="💰">💰 Финансы</option>
+            <option value="🏋️">🏋️ Спорт</option>
+            <option value="💼">💼 Карьера</option>
+            <option value="🎨">🎨 Творчество</option>
+            <option value="🌍">🌍 Языки</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Цвет темы</label>
+          <div class="flex items-center justify-between px-1">
+            <button type="button" onclick="selectColorHex('#a855f7')" class="color-dot w-6 h-6 rounded-full bg-purple-500 ring-2 ring-purple-300"></button>
+            <button type="button" onclick="selectColorHex('#06b6d4')" class="color-dot w-6 h-6 rounded-full bg-cyan-500"></button>
+            <button type="button" onclick="selectColorHex('#3b82f6')" class="color-dot w-6 h-6 rounded-full bg-blue-500"></button>
+            <button type="button" onclick="selectColorHex('#10b981')" class="color-dot w-6 h-6 rounded-full bg-emerald-500"></button>
+            <button type="button" onclick="selectColorHex('#84cc16')" class="color-dot w-6 h-6 rounded-full bg-lime-500"></button>
+            <button type="button" onclick="selectColorHex('#f59e0b')" class="color-dot w-6 h-6 rounded-full bg-amber-500"></button>
+            <button type="button" onclick="selectColorHex('#f97316')" class="color-dot w-6 h-6 rounded-full bg-orange-500"></button>
+            <button type="button" onclick="selectColorHex('#ef4444')" class="color-dot w-6 h-6 rounded-full bg-red-500"></button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 mb-1">Описание цели</label>
+          <input type="text" id="cat-goal" placeholder="Кратко опиши главную цель..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/30 transition-all">
+          Создать категорию
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CATEGORY DETAILS -->
+  <div id="modal-cat-detail" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 border border-slate-200 space-y-4 relative shadow-2xl">
+      <button onclick="closeModal('modal-cat-detail')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-sm">✕</button>
+
+      <div class="flex items-start justify-between">
+        <div class="flex items-center space-x-3">
+          <span id="cdetail-icon" class="text-2xl p-2 rounded-xl bg-pink-50 border border-pink-100">❤️</span>
+          <div>
+            <h3 id="cdetail-title" class="text-base font-bold text-slate-900">Здоровье</h3>
+            <p id="cdetail-lvl-subtitle" class="text-xs text-slate-500 font-medium">Ур. 1 • 0%</p>
+          </div>
+        </div>
+
+        <!-- Gauge percentage badge -->
+        <div class="w-12 h-12 rounded-full border-4 border-purple-500 border-t-slate-200 flex items-center justify-center text-xs font-black text-slate-800 shrink-0">
+          <span id="cdetail-gauge-text">0%</span>
+        </div>
+      </div>
+
+      <p id="cdetail-goal" class="text-xs text-slate-600">Быть в форме, чувствовать энергию и заботиться о себе.</p>
+
+      <!-- Roadmap Milestones -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-slate-800">План развития</h4>
+        <div id="cdetail-milestones" class="flex items-center justify-between px-2 pt-2">
+          <!-- Dynamic Step Nodes -->
+        </div>
+      </div>
+
+      <button id="cdetail-delete-btn" class="w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow-md shadow-rose-500/20 transition-all">
+        Удалить категорию
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: LEVEL UP -->
+  <div id="modal-levelup" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-xs rounded-3xl p-6 text-center space-y-4 relative shadow-2xl border border-slate-200">
+      
+      <!-- Sparkles graphic -->
+      <div class="w-20 h-20 mx-auto flex items-center justify-center relative">
+        <span class="text-5xl">💎</span>
+        <span class="absolute top-0 right-0 text-xl">✨</span>
+        <span class="absolute bottom-0 left-0 text-xl">🎉</span>
+      </div>
+
+      <div class="space-y-1">
+        <p class="text-xs font-bold text-blue-600 uppercase tracking-widest">Level Up!</p>
+        <h3 id="levelup-title" class="text-lg font-black text-slate-900">Поздравляем!</h3>
+        <p id="levelup-desc" class="text-xs font-semibold text-slate-700">Ты достиг <span id="levelup-num" class="text-blue-600 font-bold">2 уровня</span>!</p>
+      </div>
+
+      <p class="text-xs text-slate-500">Твой герой становится сильнее, а ты — лучше.</p>
+
+      <button onclick="closeModal('modal-levelup')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/30 transition-all">
+        Продолжить
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed top-4 right-4 z-50 bg-white border border-slate-200 text-slate-800 px-3.5 py-2.5 rounded-2xl shadow-xl transform translate-x-full opacity-0 transition-all duration-300 flex items-center space-x-3 pointer-events-none">
+    <div class="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xs shrink-0">
+      ✓
+    </div>
+    <div>
+      <p id="toast-title" class="text-xs font-bold text-slate-900">+25 XP</p>
+      <p id="toast-msg" class="text-[11px] text-slate-500">Задача выполнена!</p>
+    </div>
+    <button class="text-slate-400 hover:text-slate-600 text-xs pl-2">✕</button>
+  </div>
+
+  <script>
+    /* Default Presets */
+    const PRESET_CATEGORIES = [
+      { id: 'p-1', name: 'Здоровье', icon: '❤️', color: '#ec4899', goalDesc: 'Быть в форме и чувствовать себя отлично' },
+      { id: 'p-2', name: 'Учёба', icon: '🎓', color: '#a855f7', goalDesc: 'Новые знания и развитие интеллекта' },
+      { id: 'p-3', name: 'Продуктивность', icon: '⚡', color: '#f59e0b', goalDesc: 'Эффективность каждый день' },
+      { id: 'p-4', name: 'Финансы', icon: '💰', color: '#10b981', goalDesc: 'Финансовая грамотность и свобода' },
+      { id: 'p-5', name: 'Спорт', icon: '🏋️', color: '#3b82f6', goalDesc: 'Сила, выносливость и энергичность' },
+      { id: 'p-6', name: 'Карьера', icon: '💼', color: '#6366f1', goalDesc: 'Профессиональный рост и успехи' },
+      { id: 'p-7', name: 'Саморазвитие', icon: '🌿', color: '#84cc16', goalDesc: 'Душевный баланс и личностный рост' },
+      { id: 'p-8', name: 'Языки', icon: '🌍', color: '#06b6d4', goalDesc: 'Свободное общение по всему миру' }
+    ];
+
+    /* Global State */
+    let state = {
+      categories: [],
+      tasks: [],
+      user: {
+        name: '',
+        streak: 1,
+        totalXp: 0,
+        level: 1
+      },
+      filters: {
+        timeframe: 'today',
+        category: 'all'
+      },
+      selectedPresets: ['p-1', 'p-2', 'p-3', 'p-4', 'p-5', 'p-6'],
+      selectedColorHex: '#a855f7',
+      selectedTaskXp: 25,
+      selectedTaskTimeframe: 'today'
+    };
+
+    function loadState() {
+      try {
+        const storedUser = localStorage.getItem('skillforge_user_clean');
+        const storedCat = localStorage.getItem('skillforge_categories_clean');
+        const storedTasks = localStorage.getItem('skillforge_tasks_clean');
+
+        if (storedUser) {
+          state.user = JSON.parse(storedUser);
+          state.categories = storedCat ? JSON.parse(storedCat) : [];
+          state.tasks = storedTasks ? JSON.parse(storedTasks) : [];
+          document.getElementById('onboarding-screen').classList.add('hidden');
+          updateAllUI();
+        } else {
+          openOnboarding();
+        }
+      } catch (e) {
+        openOnboarding();
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('skillforge_user_clean', JSON.stringify(state.user));
+        localStorage.setItem('skillforge_categories_clean', JSON.stringify(state.categories));
+        localStorage.setItem('skillforge_tasks_clean', JSON.stringify(state.tasks));
+      } catch (e) {}
+    }
+
+    function openOnboarding() {
+      document.getElementById('onboarding-screen').classList.remove('hidden');
+      renderPresetGrid();
+    }
+
+    function renderPresetGrid() {
+      const grid = document.getElementById('ob-preset-grid');
+      grid.innerHTML = '';
+
+      PRESET_CATEGORIES.forEach(preset => {
+        const isSelected = state.selectedPresets.includes(preset.id);
+        const card = document.createElement('div');
+        card.className = `preset-card p-3 rounded-2xl cursor-pointer flex flex-col justify-between relative bg-white ${isSelected ? 'selected' : ''}`;
+        card.onclick = () => togglePresetSelection(preset.id, card);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xl">${preset.icon}</span>
+            <div class="w-4 h-4 rounded-full flex items-center justify-center ${isSelected ? 'bg-blue-600 text-white' : 'border border-slate-300'} text-[10px]">
+              ${isSelected ? '✓' : ''}
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-800">${preset.name}</h4>
+            <p class="text-[10px] text-slate-400 line-clamp-1">${preset.goalDesc}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function togglePresetSelection(id, cardEl) {
+      if (state.selectedPresets.includes(id)) {
+        state.selectedPresets = state.selectedPresets.filter(item => item !== id);
+      } else {
+        state.selectedPresets.push(id);
+      }
+      renderPresetGrid();
+    }
+
+    function goToOnboardingStep2() {
+      const nameInput = document.getElementById('ob-nickname').value.trim();
+      state.user.name = nameInput || 'Новичок';
+      document.getElementById('ob-step-1').classList.add('hidden');
+      document.getElementById('ob-step-2').classList.remove('hidden');
+    }
+
+    function goToOnboardingStep1() {
+      document.getElementById('ob-step-2').classList.add('hidden');
+      document.getElementById('ob-step-1').classList.remove('hidden');
+    }
+
+    function finishOnboarding() {
+      state.categories = state.selectedPresets.map((pid, idx) => {
+        const p = PRESET_CATEGORIES.find(item => item.id === pid);
+        return {
+          id: 'c-' + Date.now() + '-' + idx,
+          name: p.name,
+          icon: p.icon,
+          color: p.color,
+          level: 1,
+          xp: 0,
+          goalDesc: p.goalDesc
+        };
+      });
+
+      state.tasks = [];
+      state.user.level = 1;
+      state.user.totalXp = 0;
+      state.user.streak = 1;
+
+      saveState();
+      document.getElementById('onboarding-screen').classList.add('hidden');
+      updateAllUI();
+      showToast('Герой создан!', `Добро пожаловать, ${state.user.name}!`);
+    }
+
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-title').innerText = title;
+      document.getElementById('toast-msg').innerText = msg;
+
+      toast.classList.remove('translate-x-full', 'opacity-0');
+      toast.classList.add('translate-x-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-x-0', 'opacity-100');
+        toast.classList.add('translate-x-full', 'opacity-0');
+      }, 3000);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('text-blue-600', 'bg-blue-50');
+        btn.classList.add('text-slate-500');
+      });
+      const activeDesktopBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activeDesktopBtn) {
+        activeDesktopBtn.classList.add('text-blue-600', 'bg-blue-50');
+        activeDesktopBtn.classList.remove('text-slate-500');
+      }
+
+      ['dashboard', 'tasks', 'canvas', 'analytics'].forEach(id => {
+        const mbtn = document.getElementById(`mtab-${id}`);
+        if (mbtn) {
+          if (id === tabId) {
+            mbtn.classList.add('text-blue-600');
+            mbtn.classList.remove('text-slate-400');
+          } else {
+            mbtn.classList.remove('text-blue-600');
+            mbtn.classList.add('text-slate-400');
+          }
+        }
+      });
+
+      if (tabId === 'canvas') setTimeout(renderSkillTreeCanvas, 50);
+      if (tabId === 'analytics') setTimeout(renderAnalyticsCharts, 50);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+      if (id === 'modal-task') populateCategorySelect();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    function renderHeaderStats() {
+      document.getElementById('header-streak').innerText = state.user.streak;
+      document.getElementById('stat-streak-count').innerText = state.user.streak;
+      document.getElementById('hero-username').innerText = state.user.name || 'Новичок';
+      
+      document.getElementById('header-level').innerText = state.user.level;
+
+      document.getElementById('stat-categories-count').innerText = state.categories.length;
+
+      const todayTasks = state.tasks.filter(t => t.timeframe === 'today');
+      const completedToday = todayTasks.filter(t => t.completed).length;
+      document.getElementById('stat-today-tasks').innerText = todayTasks.length;
+
+      const totalTasksCount = state.tasks.length;
+      const completedTotalCount = state.tasks.filter(t => t.completed).length;
+      const rate = totalTasksCount > 0 ? Math.round((completedTotalCount / totalTasksCount) * 100) : 0;
+      document.getElementById('stat-completion-rate').innerText = `${rate}%`;
+
+      document.getElementById('today-task-summary-badge').innerText = `${completedToday} из ${todayTasks.length} выполнено`;
+
+      renderOverallGauge(rate);
+    }
+
+    function renderCategories() {
+      const grid = document.getElementById('categories-grid');
+      grid.innerHTML = '';
+
+      if (state.categories.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full app-card p-6 text-center space-y-2">
+            <p class="text-xs text-slate-400">У вас пока нет созданных сфер развития.</p>
+            <button onclick="openModal('modal-category')" class="text-xs font-bold text-blue-600 hover:underline">+ Добавить сферу</button>
+          </div>
+        `;
+        return;
+      }
+
+      state.categories.forEach(cat => {
+        const percent = cat.xp;
+
+        const card = document.createElement('div');
+        card.className = 'app-card p-3.5 cursor-pointer flex flex-col justify-between space-y-2.5';
+        card.onclick = () => openCategoryDetail(cat.id);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+              <span class="text-xl p-1.5 rounded-xl bg-slate-50 border border-slate-100">${cat.icon}</span>
+              <div>
+                <h4 class="font-bold text-slate-800 text-xs">${cat.name}</h4>
+                <p class="text-[10px] text-slate-400 font-medium">Ур. ${cat.level}</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-slate-600">${percent}%</span>
+          </div>
+
+          <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-500" style="width: ${percent}%; background-color: ${cat.color}"></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderDashboardTasks() {
+      const container = document.getElementById('dashboard-tasks-list');
+      container.innerHTML = '';
+
+      const todayTasks = state.tasks.filter(t => t.timeframe === 'today');
+
+      if (todayTasks.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 text-center text-xs text-slate-400">
+            Нет задач на сегодня. Создайте новую задачу!
+          </div>
+        `;
+        return;
+      }
+
+      todayTasks.forEach(task => {
+        const cat = state.categories.find(c => c.id === task.categoryId) || { icon: '🎓', name: 'Общее', color: '#a855f7' };
+        
+        const el = document.createElement('div');
+        el.className = `p-2.5 rounded-xl border border-slate-100 bg-slate-50/50 flex items-center justify-between transition-all`;
+
+        el.innerHTML = `
+          <div class="flex items-center space-x-2.5 flex-1 min-w-0">
+            <button onclick="toggleTask('${task.id}')" class="w-5 h-5 rounded-md border ${task.completed ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-300'} flex items-center justify-center text-xs shrink-0">
+              ${task.completed ? '✓' : ''}
+            </button>
+            <span class="text-xs font-semibold ${task.completed ? 'line-through text-slate-400' : 'text-slate-800'} truncate">${task.title}</span>
+          </div>
+
+          <div class="flex items-center space-x-2 shrink-0">
+            <span class="text-[10px] font-bold text-amber-600">+${task.xp} XP</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md text-purple-600 bg-purple-50 border border-purple-100">
+              ${cat.name}
+            </span>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function renderTasks() {
+      const container = document.getElementById('full-tasks-list');
+      container.innerHTML = '';
+
+      let filtered = state.tasks;
+      if (state.filters.timeframe !== 'all') {
+        filtered = filtered.filter(t => t.timeframe === state.filters.timeframe);
+      }
+
+      const selectedCat = document.getElementById('filter-category-select').value;
+      if (selectedCat && selectedCat !== 'all') {
+        filtered = filtered.filter(t => t.categoryId === selectedCat);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="app-card p-8 text-center text-xs text-slate-400">
+            Список задач пуст.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(task => {
+        const cat = state.categories.find(c => c.id === task.categoryId) || { icon: '🎓', name: 'Общее', color: '#a855f7' };
+
+        const el = document.createElement('div');
+        el.className = `app-card p-3 flex items-center justify-between gap-2`;
+
+        el.innerHTML = `
+          <div class="flex items-center space-x-3 flex-1 min-w-0">
+            <button onclick="toggleTask('${task.id}')" class="w-5 h-5 rounded-md border ${task.completed ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-300'} flex items-center justify-center text-xs shrink-0">
+              ${task.completed ? '✓' : ''}
+            </button>
+            <div class="min-w-0">
+              <h4 class="text-xs font-bold ${task.completed ? 'line-through text-slate-400' : 'text-slate-800'} truncate">${task.title}</h4>
+              <div class="flex items-center space-x-2 mt-0.5">
+                <span class="text-[10px] font-semibold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded">${cat.name}</span>
+                <span class="text-[10px] text-slate-400">${task.dateLabel || 'Сегодня'}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2 shrink-0">
+            <span class="text-xs font-bold text-amber-500">+${task.xp} XP</span>
+            <button onclick="deleteTask('${task.id}')" class="text-slate-300 hover:text-rose-500 p-1 text-xs">🗑️</button>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function setTaskFilter(type, value) {
+      if (type === 'timeframe') {
+        state.filters.timeframe = value;
+        document.querySelectorAll('.tf-btn').forEach(btn => {
+          btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+          btn.classList.add('text-slate-500');
+        });
+        const activeBtn = document.getElementById(`filter-tf-${value}`);
+        if (activeBtn) {
+          activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+          activeBtn.classList.remove('text-slate-500');
+        }
+      }
+      renderTasks();
+    }
+
+    function toggleTask(taskId) {
+      const task = state.tasks.find(t => t.id === taskId);
+      if (!task) return;
+
+      task.completed = !task.completed;
+      const cat = state.categories.find(c => c.id === task.categoryId);
+
+      if (task.completed) {
+        state.user.totalXp += task.xp;
+        if (cat) {
+          cat.xp += task.xp;
+          if (cat.xp >= 100) {
+            cat.xp -= 100;
+            cat.level += 1;
+            state.user.level += 1;
+            triggerLevelUpFX(cat.level);
+          } else {
+            showToast(`+${task.xp} XP`, `Задача "${task.title}" выполнена!`);
+          }
+        }
+      }
+
+      saveState();
+      updateAllUI();
+    }
+
+    function triggerLevelUpFX(levelNum) {
+      document.getElementById('levelup-num').innerText = `${levelNum} уровня`;
+      openModal('modal-levelup');
+      fireworksBurst();
+    }
+
+    function handleAddTask(e) {
+      e.preventDefault();
+      const title = document.getElementById('task-title').value.trim();
+      const categoryId = document.getElementById('task-category-select').value;
+
+      if (!title || !categoryId) return;
+
+      const newTask = {
+        id: 't-' + Date.now(),
+        title,
+        categoryId,
+        timeframe: state.selectedTaskTimeframe,
+        xp: state.selectedTaskXp,
+        completed: false,
+        dateLabel: 'Сегодня'
+      };
+
+      state.tasks.unshift(newTask);
+      saveState();
+      closeModal('modal-task');
+      document.getElementById('form-add-task').reset();
+
+      updateAllUI();
+      showToast('Задача создана', title);
+    }
+
+    function selectTimeframePill(tf) {
+      state.selectedTaskTimeframe = tf;
+      document.querySelectorAll('.tf-pill-btn').forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+      document.getElementById(`tf-pill-${tf}`).classList.add('bg-blue-600', 'text-white');
+    }
+
+    function selectXpPill(xp) {
+      state.selectedTaskXp = xp;
+      document.querySelectorAll('.xp-pill-btn').forEach(b => {
+        b.classList.remove('border-2', 'border-blue-500', 'bg-blue-50', 'text-blue-600');
+        b.classList.add('border-slate-200', 'text-slate-600');
+      });
+      document.getElementById(`xp-pill-${xp}`).classList.add('border-2', 'border-blue-500', 'bg-blue-50', 'text-blue-600');
+    }
+
+    function deleteTask(taskId) {
+      state.tasks = state.tasks.filter(t => t.id !== taskId);
+      saveState();
+      updateAllUI();
+    }
+
+    function handleAddCategory(e) {
+      e.preventDefault();
+      const name = document.getElementById('cat-title').value.trim();
+      const icon = document.getElementById('cat-icon').value;
+      const goalDesc = document.getElementById('cat-goal').value.trim() || 'Ежедневное развитие';
+
+      if (!name) return;
+
+      const newCat = {
+        id: 'c-' + Date.now(),
+        name,
+        icon,
+        color: state.selectedColorHex,
+        level: 1,
+        xp: 0,
+        goalDesc
+      };
+
+      state.categories.push(newCat);
+      saveState();
+      closeModal('modal-category');
+      document.getElementById('form-add-category').reset();
+
+      updateAllUI();
+      showToast('Категория добавлена', name);
+    }
+
+    function selectColorHex(hex) {
+      state.selectedColorHex = hex;
+    }
+
+    function openCategoryDetail(catId) {
+      const cat = state.categories.find(c => c.id === catId);
+      if (!cat) return;
+
+      document.getElementById('cdetail-icon').innerText = cat.icon;
+      document.getElementById('cdetail-title').innerText = cat.name;
+      document.getElementById('cdetail-lvl-subtitle').innerText = `Ур. ${cat.level} • ${cat.xp}%`;
+      document.getElementById('cdetail-gauge-text').innerText = `${cat.xp}%`;
+      document.getElementById('cdetail-goal').innerText = cat.goalDesc;
+
+      const milestones = document.getElementById('cdetail-milestones');
+      milestones.innerHTML = '';
+
+      for (let i = 1; i <= 5; i++) {
+        const isDone = i < cat.level;
+        const isCurrent = i === cat.level;
+
+        const node = document.createElement('div');
+        node.className = 'flex flex-col items-center space-y-1';
+        node.innerHTML = `
+          <div class="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${isDone ? 'bg-blue-600 text-white' : isCurrent ? 'bg-blue-100 text-blue-600 ring-2 ring-blue-500' : 'bg-slate-100 text-slate-400'}">
+            ${isDone ? '✓' : isCurrent ? '●' : '🔒'}
+          </div>
+          <span class="text-[9px] font-bold text-slate-400">${isDone ? 'Пройден' : isCurrent ? 'Текущий' : 'Закрыт'}</span>
+        `;
+        milestones.appendChild(node);
+      }
+
+      document.getElementById('cdetail-delete-btn').onclick = () => deleteCategory(catId);
+      openModal('modal-cat-detail');
+    }
+
+    function deleteCategory(catId) {
+      state.categories = state.categories.filter(c => c.id !== catId);
+      state.tasks = state.tasks.filter(t => t.categoryId !== catId);
+      saveState();
+      closeModal('modal-cat-detail');
+      updateAllUI();
+    }
+
+    function populateCategorySelect() {
+      const sel = document.getElementById('task-category-select');
+      const filterSel = document.getElementById('filter-category-select');
+
+      sel.innerHTML = '';
+      filterSel.innerHTML = '<option value="all">Все категории ∨</option>';
+
+      state.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.innerText = `${cat.icon} ${cat.name}`;
+        sel.appendChild(opt);
+
+        const opt2 = document.createElement('option');
+        opt2.value = cat.id;
+        opt2.innerText = `${cat.icon} ${cat.name}`;
+        filterSel.appendChild(opt2);
+      });
+    }
+
+    function renderOverallGauge(percentage) {
+      const canvas = document.getElementById('gauge-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const radius = 46;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Background Ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = '#f1f5f9';
+      ctx.lineWidth = 10;
+      ctx.stroke();
+
+      // Active Arc
+      const startAngle = -Math.PI / 2;
+      const endAngle = startAngle + (Math.PI * 2 * (percentage / 100));
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, startAngle, endAngle);
+      ctx.strokeStyle = '#3b82f6';
+      ctx.lineWidth = 10;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+
+      document.getElementById('gauge-percent-text').innerText = `${percentage}%`;
+    }
+
+    let canvasNodes = [];
+
+    function renderSkillTreeCanvas() {
+      const canvas = document.getElementById('skill-tree-canvas');
+      if (!canvas) return;
+
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      const ctx = canvas.getContext('2d');
+
+      const width = canvas.width;
+      const height = canvas.height;
+      const cx = width / 2;
+      const cy = height / 2;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Orbital Lines
+      [70, 120].forEach(r => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      // Center Avatar Hub
+      ctx.beginPath();
+      ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+      ctx.fillStyle = '#1e293b';
+      ctx.fill();
+      ctx.strokeStyle = '#3b82f6';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '16px Inter';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🧙‍♂️', cx, cy);
+
+      canvasNodes = [];
+      const count = state.categories.length;
+
+      state.categories.forEach((cat, idx) => {
+        const angle = (idx / (count || 1)) * Math.PI * 2 - Math.PI / 2;
+        const radius = 105;
+
+        const nx = cx + Math.cos(angle) * radius;
+        const ny = cy + Math.sin(angle) * radius;
+
+        // Connecting Line
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(nx, ny);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Node Circle
+        ctx.beginPath();
+        ctx.arc(nx, ny, 18, 0, Math.PI * 2);
+        ctx.fillStyle = '#1e293b';
+        ctx.strokeStyle = cat.color;
+        ctx.lineWidth = 2.5;
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '14px Inter';
+        ctx.fillText(cat.icon, nx, ny);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px Inter';
+        ctx.fillText(cat.name, nx, ny + 28);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '9px Inter';
+        ctx.fillText(`Ур. ${cat.level}`, nx, ny + 38);
+
+        canvasNodes.push({ x: nx, y: ny, radius: 18, category: cat });
+      });
+    }
+
+    document.getElementById('skill-tree-canvas').addEventListener('click', (e) => {
+      const canvas = document.getElementById('skill-tree-canvas');
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      const clicked = canvasNodes.find(n => Math.hypot(n.x - clickX, n.y - clickY) <= n.radius);
+
+      if (clicked) {
+        const cat = clicked.category;
+        document.getElementById('cnode-icon').innerText = cat.icon;
+        document.getElementById('cnode-title').innerText = cat.name;
+        document.getElementById('cnode-level').innerText = `Ур. ${cat.level} • ${cat.xp}%`;
+        document.getElementById('cnode-goal').innerText = cat.goalDesc;
+        document.getElementById('cnode-bar').style.width = `${cat.xp}%`;
+
+        document.getElementById('cnode-detail-btn').onclick = () => {
+          openCategoryDetail(cat.id);
+        };
+      }
+    });
+
+    function renderAnalyticsCharts() {
+      document.getElementById('analytics-total-xp').innerText = `+${state.user.totalXp} XP`;
+
+      // Weekly Bar Chart
+      const chartCanvas = document.getElementById('chart-xp-history');
+      if (chartCanvas) {
+        const rect = chartCanvas.parentElement.getBoundingClientRect();
+        chartCanvas.width = rect.width;
+        chartCanvas.height = rect.height;
+        const ctx = chartCanvas.getContext('2d');
+        const w = chartCanvas.width;
+        const h = chartCanvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+        const values = [10, 15, 25, 40, 20, 30, state.user.totalXp || 5];
+        const maxVal = Math.max(...values, 50);
+
+        const barWidth = 20;
+        const gap = (w - 30 - (barWidth * days.length)) / (days.length - 1);
+
+        days.forEach((day, i) => {
+          const val = values[i];
+          const barHeight = (val / maxVal) * (h - 45);
+          const x = 15 + i * (barWidth + gap);
+          const y = h - 25 - barHeight;
+
+          const grad = ctx.createLinearGradient(0, y, 0, h - 25);
+          grad.addColorStop(0, '#8b5cf6');
+          grad.addColorStop(1, '#3b82f6');
+
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.roundRect(x, y, barWidth, barHeight, 6);
+          ctx.fill();
+
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '10px Inter';
+          ctx.textAlign = 'center';
+          ctx.fillText(day, x + barWidth / 2, h - 8);
+        });
+      }
+
+      // Doughnut Pie Chart
+      const pieCanvas = document.getElementById('chart-category-pie');
+      if (pieCanvas) {
+        const rect = pieCanvas.parentElement.getBoundingClientRect();
+        pieCanvas.width = rect.width;
+        pieCanvas.height = rect.height;
+        const ctx = pieCanvas.getContext('2d');
+        const w = pieCanvas.width;
+        const h = pieCanvas.height;
+        const cx = w / 2;
+        const cy = h / 2;
+        const radius = Math.min(w, h) / 2.2;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const legendList = document.getElementById('pie-legend-list');
+        legendList.innerHTML = '';
+        document.getElementById('pie-total-spheres').innerText = `${state.categories.length} сфер`;
+
+        if (state.categories.length === 0) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#e2e8f0';
+          ctx.fill();
+        } else {
+          let startAngle = 0;
+          const totalWeight = state.categories.reduce((acc, c) => acc + (c.xp + c.level * 10), 0) || 1;
+
+          state.categories.forEach(cat => {
+            const weight = cat.xp + cat.level * 10;
+            const sliceAngle = (weight / totalWeight) * Math.PI * 2;
+
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, radius, startAngle, startAngle + sliceAngle);
+            ctx.closePath();
+            ctx.fillStyle = cat.color;
+            ctx.fill();
+
+            startAngle += sliceAngle;
+
+            const legendItem = document.createElement('div');
+            legendItem.className = 'flex items-center justify-between text-xs';
+            legendItem.innerHTML = `
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${cat.color}"></span>
+                <span class="text-slate-700 font-medium">${cat.name}</span>
+              </div>
+              <span class="font-bold text-slate-800">${Math.round((weight / totalWeight) * 100)}%</span>
+            `;
+            legendList.appendChild(legendItem);
+          });
+        }
+
+        // Center cutout hole
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * 0.65, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+
+      renderAchievements();
+    }
+
+    function renderAchievements() {
+      const achievements = [
+        { icon: '⭐', name: 'Первый квест', unlocked: state.tasks.some(t => t.completed) },
+        { icon: '🔥', name: 'В ударе', unlocked: state.user.streak >= 3 },
+        { icon: '🛡️', name: 'Мастер сфер', unlocked: state.categories.length >= 5 }
+      ];
+
+      const container = document.getElementById('achievements-list');
+      container.innerHTML = '';
+
+      achievements.forEach(a => {
+        const el = document.createElement('div');
+        el.className = `p-3 rounded-2xl border text-center flex flex-col items-center justify-between space-y-1 ${a.unlocked ? 'bg-amber-50/60 border-amber-200' : 'bg-slate-50 border-slate-200 opacity-50'}`;
+
+        el.innerHTML = `
+          <span class="text-2xl">${a.icon}</span>
+          <h5 class="text-[11px] font-bold text-slate-800 line-clamp-1">${a.name}</h5>
+          <span class="text-[9px] font-semibold ${a.unlocked ? 'text-amber-600' : 'text-slate-400'}">${a.unlocked ? 'Разблокировано' : 'Заблокировано'}</span>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function fireworksBurst() {
+      const canvas = document.getElementById('fx-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#3b82f6', '#a855f7', '#ec4899', '#f59e0b', '#10b981'];
+
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 10,
+          vy: (Math.random() - 0.5) * 10,
+          radius: Math.random() * 3 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          decay: Math.random() * 0.02 + 0.015
+        });
+      }
+
+      function renderFX() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+
+        particles.forEach(p => {
+          if (p.alpha > 0) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.12;
+            p.alpha -= p.decay;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.fill();
+            active = true;
+          }
+        });
+
+        if (active) requestAnimationFrame(renderFX);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      renderFX();
+    }
+
+    function updateAllUI() {
+      renderHeaderStats();
+      renderCategories();
+      renderDashboardTasks();
+      renderTasks();
+      populateCategorySelect();
+    }
+
+    /* PWA Install Prompt handling */
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('pwa-install-btn');
+      if (btn) {
+        btn.classList.remove('hidden');
+        btn.classList.add('flex');
+      }
+    });
+
+    function installPWA() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          showToast('Приложение установлено!', 'Иконка SkillForge появится на рабочем столе');
+        }
+        deferredPrompt = null;
+        const btn = document.getElementById('pwa-install-btn');
+        if (btn) btn.classList.add('hidden');
+      });
+    }
+
+    // PWA Service Worker via Blob URL
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        self.addEventListener('install', e => self.skipWaiting());
+        self.addEventListener('activate', e => self.clients.claim());
+        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
+      `;
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    }
+
+    window.onload = function () {
+      loadState();
+      window.addEventListener('resize', () => {
+        renderSkillTreeCanvas();
+      });
+    };
+  </script>
+</body>
+</html>
